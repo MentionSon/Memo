@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>备忘录</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+</head>
+<body>
+    <div id="main">
+        <div class="navbar">
+            <h1>备忘录</h1>
+        </div>
+        <div class="header">
+            您的备忘清单
+        </div>
+        <form @submit.prevent="merge" id="task-form">
+            <div class="wrap">
+                <input v-model="current.title" id="task-input" type="text" autocomplete="off" placeholder="What are you planing to do..." class="input-title">
+                <div class="detail">
+                    <textarea v-model="current.desc"></textarea>
+                    <span>定时提醒</span>
+                    <input v-model="current.remindTiming" type="datetime-local">
+                    <button type="submit" class="sub">Submit</button>
+                </div>
+                
+            </div>        
+        </form>
+        <div class="task-list">
+            <div class="wrap">
+                <span>未完成</span>
+                <task :todo="todo"
+                      v-if="!todo.completed"
+                      v-for="(todo, index) in list">
+                      <i class="iconfont icon-check-circle"></i>
+                </task>           
+            </div>
+        </div>
+        <div class="task-list">
+            <div class="wrap">
+                <span>已完成</span>
+                <task :todo="todo"
+                      v-if="todo.completed"
+                      v-for="(todo, index) in list">
+                      <i class="iconfont icon-close-circle"></i>
+                </task>
+            </div>    
+        </div>
+    </div>
+    <template id="task-tpl">
+        <div class="item">
+            <button @click="action('toggleComplete', todo.id)">
+                <slot></slot>
+            </button>
+            {{todo.title}}
+            <button @click="action('remove', todo.id)" class="btn-control"><i class="iconfont icon-delete"></i></button>
+            <button @click="action('setCurrent', todo)" class="btn-control">
+                <i class="iconfont icon-edit-square"></i>
+            </button>
+            <button @click="action('toggleDetail', todo.id)" class="btn-control">
+                <i class="iconfont icon-detail"></i>
+            </button>
+            <div v-if="todo.showDetail" class="detail">{{todo.desc || '暂无详情'}}</div>
+        </div>
+    </template>
+<script src="js/vue.js"></script>
+<script src="js/myStorage.js"></script>
+<script src="js/main.js"></script>
+<script src="js/iconfont.js"></script>
+</body>
+</html>
