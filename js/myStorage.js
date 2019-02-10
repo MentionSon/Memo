@@ -1,3 +1,5 @@
+/* localStorage 的数据注入模块 */
+
 ;(function () {
     window.ms = {
         set: set,
