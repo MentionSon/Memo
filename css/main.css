@@ -80,10 +80,15 @@ span {
     margin: 10px auto;
     width: 100%;
     line-height: 30px;
+    padding: 5px;
     font-size: 18px;
     border-radius: 3px;
-    background-color: cadetblue;
-    color: #fff;
+    background-color: rgb(151, 102, 102);
+    color: rgb(170, 177, 170);
+}
+
+.sub:hover {
+    color: rgb(243, 232, 232);
 }
 
 .item {
@@ -98,4 +103,12 @@ span {
 
 .item:hover .btn-control {
     display: inline-block;
+}
+
+.detail {
+    padding: 15px 10px;
+    background-color: rgb(133, 149, 182);
+    color: #fff;
+    border-radius: 3px;
+    margin: 5px 0;
 }
